@@ -3,6 +3,38 @@ using System.Collections;
 
 Console.WriteLine("Hello, World!");
 
+// Creating a linkedlist
+// Using LinkedList class
+LinkedList<String> my_list = new LinkedList<String>();
+
+// Adding elements in the LinkedList
+// Using AddLast() method
+my_list.AddLast("Zoya");
+my_list.AddLast("Shilpa");
+my_list.AddLast("Rohit");
+my_list.AddLast("Rohan");
+my_list.AddLast("Juhi");
+my_list.AddLast("Zoya");
+
+//my_list.Remove(my_list.First);
+//my_list.Remove("Rohit");
+//my_list.RemoveFirst();
+
+if (my_list.Contains("Shilpa") == true)
+{
+    Console.WriteLine("Element Found...!!");
+}
+
+Console.WriteLine("Best students of XYZ university:");
+
+// Accessing the elements of
+// LinkedList Using foreach loop
+foreach (string str in my_list)
+{
+    Console.WriteLine(str);
+}
+
+
 int[] nums = { 1,2,3,4,5,6 };
 int target = 9;
 
@@ -24,8 +56,90 @@ ProductExceptSelf2(nums3);
 string s2 = "(){}}{";
 IsValid(s2);
 
-//valid parenthesis
-bool IsValid(string s)
+int[] nums4 = { 1, 1, 2 };
+RemoveDuplicates(nums4);
+
+string s3 = "a";
+LengthOfLastWord(s3);
+
+int[] digits = { 9,9};
+PlusOne(digits);
+PlusOne2(digits);
+
+//funciona pero el length es demasiado grande, tiene q soportar numeros de 100 digitos
+int[] PlusOne(int[] digits) 
+{
+    string digitsConverted="";
+
+    for (int i=0; i<digits.Length; i++)
+    {
+        digitsConverted = digitsConverted + digits[i].ToString();
+    }
+
+    long sum = Convert.ToInt64(digitsConverted) + 1;
+    var intList = sum.ToString().Select(digit => int.Parse(digit.ToString())).ToArray();
+
+    return intList;
+}
+
+int[] PlusOne2(int[] digits)
+{
+    for (int i = digits.Length - 1; i >= 0; i--)
+    {
+        if(digits[i] < 9)
+        {
+            digits[i]++;
+            return digits;
+        }
+        digits[i] = 0;
+    }
+
+    int[] result = new int[digits.Length+1];
+    result[0] = 1;
+
+    return result;
+}
+
+int LengthOfLastWord(string s)
+{
+   string removeSpacesEnd= s.TrimEnd();
+    int length = 0;
+
+    for (int i = removeSpacesEnd.Length-1; i >= 0; i--)
+    {
+        if(removeSpacesEnd[i] != ' ')
+        {
+            length++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return length;
+}
+
+//mi solucion anda bien, pero rompe la pija con lo del array
+int RemoveDuplicates(int[] nums)
+{
+    int removedItems = 0;
+
+    for (int i = 0; i < nums.Length-1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            nums = nums.Where((source, index) => index != i).ToArray();
+            nums = nums.Concat(new int[] {0}).ToArray();
+            removedItems++;
+        }
+    }
+
+    return nums.Length - removedItems;
+}
+
+    //valid parenthesis
+    bool IsValid(string s)
 {
     Stack stack = new Stack();
 
