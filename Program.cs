@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Collections;
+using System.Text;
 
 Console.WriteLine("Hello, World!");
 
@@ -65,6 +66,88 @@ LengthOfLastWord(s3);
 int[] digits = { 9,9};
 PlusOne(digits);
 PlusOne2(digits);
+
+string a = "1111", b = "1111";
+AddBinary(a, b);
+
+//funciona pero es numero demasiado largo(me parecia jaja)
+string AddBinary(string a, string b)
+{
+    int aLength = a.Length;
+    int bLength = b.Length;
+
+    string result = "";
+    bool carry = false;
+
+    
+    if (aLength > bLength)
+    {
+        for (int i = 0; i < aLength - bLength; i++)
+        {
+            b = b.Insert(0, "0");
+        }
+    }
+    if(bLength > aLength)
+    {
+        for (int i = 0; i < bLength - aLength; i++)
+        {
+            a = a.Insert(0, "0");
+        }
+    }
+
+    for (int i = a.Length-1; i >=0; i--)
+    {
+        var valueA = a[i];
+        var valueB = b[i];
+
+        //"11110"
+
+        if (valueA =='1' && valueB == '1')
+        {
+            if (carry)
+            {
+                result = result.Insert(0, "1");
+            }
+            else
+            {
+                result = result.Insert(0, "0");
+            }
+            
+            carry = true;
+        }
+        else if(valueA =='0' && valueB == '0')
+        {
+            if (carry)
+            {
+                result = result.Insert(0, "1");
+            }
+            else
+            {
+                result=result.Insert(0, "0");
+            }
+            carry = false;
+        }
+        else
+        {
+            if (carry)
+            {
+                result = result.Insert(0, "0");
+                carry=true;
+            }
+            else
+            {
+                result= result.Insert(0, "1");
+                carry=false;
+            }
+        }
+    }
+    if (carry)
+    {
+        result = result.Insert(0, "1");
+    }
+
+    return result;
+}
 
 //funciona pero el length es demasiado grande, tiene q soportar numeros de 100 digitos
 int[] PlusOne(int[] digits) 
@@ -138,8 +221,8 @@ int RemoveDuplicates(int[] nums)
     return nums.Length - removedItems;
 }
 
-    //valid parenthesis
-    bool IsValid(string s)
+//valid parenthesis
+bool IsValid(string s)
 {
     Stack stack = new Stack();
 
@@ -354,8 +437,6 @@ int RomanToInt(string s)
     }
     return result;
 }
-
-
 
 int[] TwoSum(int[] nums, int target)
 {
