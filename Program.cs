@@ -70,7 +70,59 @@ PlusOne2(digits);
 string a = "1111", b = "1111";
 AddBinary(a, b);
 
-//funciona pero es numero demasiado largo(me parecia jaja)
+int x = 1000;
+//MySqrt(x);
+MySqrt2(x);
+
+//funciona pero da timeout
+int MySqrt(int x)
+{
+        for (int i = 0; i <= x; i++)
+        {
+            var pow = i * i;
+
+            if (pow == x)
+            {
+                return i;
+            }
+            if (pow > x)
+            {
+                return i - 1;
+            }
+        }
+
+    return 0;
+}
+
+int MySqrt2(int x)
+{
+    long start = 0;
+    long end = x;
+
+    while (start+1 < end)
+    {
+        long mid = start + (end - start)/2;
+        if(mid*mid == x)
+        {
+            return (int)mid;
+        }
+        else if(mid*mid < x)
+        {
+            start = mid;
+        }
+        else
+        {
+            end = mid;
+        }
+    }
+
+    if(end*end == x)
+    {
+        return (int)end;
+    }
+    return (int)start;
+}
+
 string AddBinary(string a, string b)
 {
     int aLength = a.Length;
