@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 Console.WriteLine("Hello, World!");
@@ -79,6 +82,46 @@ int[] _nums2 = { 1 };
 int m = 0;
 int n = 1;
 Merge(_nums1,m,_nums2,n);
+
+int n2 = 5;
+CountBits(n2);
+
+int n3 = 3;
+Fib(n3);
+
+static int Fib(int n)
+{
+    Dictionary<int, int> fibonaccis = new Dictionary<int, int>();
+    fibonaccis.Add(0, 0);
+    fibonaccis.Add(1, 1);
+
+    for (int i = 0; i <= n-2; i++)
+    {
+        var fibo = fibonaccis.GetValueOrDefault(i) + fibonaccis.GetValueOrDefault(i+1);
+        fibonaccis.Add(i+2, fibo);
+
+    }
+
+    return fibonaccis.GetValueOrDefault(n);
+}
+
+static int[] CountBits(int n)
+{
+    int[] result = new int[n+1];
+
+    for (int i = 0; i <= n; i++)
+    {
+        string s = Convert.ToString(i, 2); //Convert to binary in a string
+
+        int[] bits = s.PadLeft(8, '0') // Add 0's from left
+                     .Select(c => int.Parse(c.ToString())) // convert each char to int
+                     .ToArray(); // Convert IEnumerable from select to Array
+
+        result[i] = bits.Where(x => x == 1).Count();
+    }
+
+    return result;
+}
 
 //se usan 3 pointers uno de index, otro m y otro n
 static void Merge(int[] nums1, int m, int[] nums2, int n) {
