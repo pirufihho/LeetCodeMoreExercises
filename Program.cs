@@ -74,6 +74,53 @@ int x = 1000;
 //MySqrt(x);
 MySqrt2(x);
 
+int[] _nums1 = { 0 };
+int[] _nums2 = { 1 };
+int m = 0;
+int n = 1;
+Merge(_nums1,m,_nums2,n);
+
+//se usan 3 pointers uno de index, otro m y otro n
+static void Merge(int[] nums1, int m, int[] nums2, int n) {
+
+    //???para que no se salga de bounds
+    m--; n--;
+
+    int index = nums1.Length - 1;
+    while (index >= 0)
+    {
+        //si no hay mas numeros de m, usa el valor de n
+        if(m < 0)
+        {
+            nums1[index] = nums2[n--];
+        }
+        //si no hay mas numeros de n, usa el valor de m
+        else if (n < 0)
+        {
+            nums1[index] = nums1[m--];
+        }
+        else
+        {
+            //si el numero en la posicion m del array 1 es 
+            //mayor al numero en la posicion n del array 2
+            //lo setea al array en la posicion index
+            if(nums1[m] > nums2[n])
+            {
+                nums1[index] = nums1[m--];  
+            }
+            //si el numero en la posicion n del array 2 es 
+            //mayor al numero en la posicion m del array 1
+            //lo setea al array en la posicion index
+            else
+            {
+                nums1[index] = nums2[n--];
+            }
+        }
+
+        index--;
+    }
+}
+
 //funciona pero da timeout
 int MySqrt(int x)
 {
