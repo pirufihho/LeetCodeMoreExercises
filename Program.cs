@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 Console.WriteLine("Hello, World!");
 
@@ -88,6 +89,132 @@ CountBits(n2);
 
 int n3 = 3;
 Fib(n3);
+
+string[] strs = { "abab","aba","" };
+LongestCommonPrefix(strs);
+
+string s4 = "0P";
+IsPalindrome(s4);
+
+int n5 = 2;
+IsHappy(n5);
+
+bool IsHappy(int n)
+{
+    int sum = 0;
+    int iterations = 0;
+    while (sum != 1)
+    {
+        iterations++;
+        if(iterations == 100)
+        {
+            return false;
+        }
+        //conver n to array of digits
+        int[] outarry = Array.ConvertAll(n.ToString().ToArray(), x => (int)x - 48);
+
+        for (int i = 0; i < outarry.Length; i++)
+        {
+            sum = sum + (int)Math.Pow(outarry[i], 2);
+        }
+
+        if (sum == 1)
+        {
+            return true;
+        }
+
+        if(sum != 0)
+        {
+            n = sum;
+            sum=0;
+        }
+    }
+
+    return false;
+}
+
+bool IsPalindrome(string s) {
+
+    //remove white spaces
+    var convertString = new string(s.ToCharArray()
+        .Where(c => !Char.IsWhiteSpace(c))
+        .ToArray());
+    //remove special characters
+    convertString = new String(convertString.Where(Char.IsLetterOrDigit).ToArray());
+    //convert to lower case
+    convertString = convertString.ToLower();
+
+    //compare string == to string reverse
+    char[] array = convertString.ToCharArray();
+    Array.Reverse(array);
+    string reverse = new String(array);
+
+    if (convertString.Equals(reverse))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+string LongestCommonPrefix(string[] strs)
+{
+    string result = "";
+    Array.Sort(strs, (x, y) => x.Length.CompareTo(y.Length));
+
+    Dictionary<int, string> dic = new Dictionary<int, string>();  
+
+    for (int i = 0; i < strs.Length-1; i++)
+    {
+        if(strs[i].Length == 0)
+        {
+            return "";
+        }
+        string compare = "";
+
+        for (int j = 0; j < strs[i].Length; j++)
+        {
+
+            if(strs[i][j] == strs[i + 1][j])
+            {
+                
+                compare = compare + strs[i][j].ToString();
+            }
+            else
+            {
+                //compare first values 
+                if(strs[i][0] != strs[i + 1][0])
+                {
+                    dic.Add(i, compare);
+                }
+                break;
+            }
+            if (dic.ContainsKey(i))
+            {
+                dic[i] = compare;
+            }
+            else
+            {
+                dic.Add(i, compare);
+            }
+            
+
+        }
+        
+    }
+
+    if(strs.Length == 1)
+    {
+        return strs[0];
+    }
+
+    if(dic.Count == 0)
+    {
+        return "";
+    }
+
+    return dic.Values.Min();
+}
 
 static int Fib(int n)
 {
