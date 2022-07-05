@@ -102,6 +102,28 @@ IsHappy(n5);
 int numRows = 1;
 Generate(numRows);
 
+int[] nums5 = { 2, 2, 1 };
+SingleNumber(nums5);
+
+int SingleNumber(int[] nums)
+{
+    Dictionary<int, int> numCoincidences = new Dictionary<int, int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (numCoincidences.ContainsKey(nums[i]) == false)
+        {
+            numCoincidences.Add(nums[i], 1);
+        }
+        else
+        {
+            numCoincidences[nums[i]] = numCoincidences.GetValueOrDefault(nums[i]) + 1;
+        }
+    }
+
+    return numCoincidences.OrderBy(x => x.Value).First().Key;
+}
+
 IList<IList<int>> Generate(int numRows)
 {
     //fill array with 1
