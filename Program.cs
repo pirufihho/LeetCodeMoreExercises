@@ -99,6 +99,42 @@ IsPalindrome(s4);
 int n5 = 2;
 IsHappy(n5);
 
+int numRows = 1;
+Generate(numRows);
+
+IList<IList<int>> Generate(int numRows)
+{
+    //fill array with 1
+    List<int>[] results = new List<int>[numRows];
+
+    for (int i = 0; i < numRows; i++)
+    {
+        results[i] = new List<int>();
+
+        for (int j = 0; j <= i; j++)
+        {
+            results[i].Add(1);
+        }
+    }
+
+    int finalindex = 1;
+
+    //set values at position needed
+    for (int i = 2; i < results.Length; i++)
+    {
+        finalindex++;
+        for (int fills = 1; fills < finalindex; fills++)
+        {
+
+            results[i][fills] = results[i - 1][fills-1] + results[i - 1][fills];
+        }
+        
+    }
+
+
+    return results;
+}
+
 bool IsHappy(int n)
 {
     int sum = 0;
