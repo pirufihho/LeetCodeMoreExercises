@@ -105,6 +105,35 @@ Generate(numRows);
 int[] nums5 = { 2, 2, 1 };
 SingleNumber(nums5);
 
+int rowIndex = 3;
+GetRow(rowIndex);
+
+int[] nums6 = { 1 };
+MajorityElement(nums6);
+
+int MajorityElement(int[] nums)
+{
+    int majorityN = nums.Length / 2;
+    Dictionary<int, int> ocurrences = new Dictionary<int, int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (ocurrences.ContainsKey(nums[i]))
+        {
+            ocurrences[nums[i]]++;
+            if(ocurrences[nums[i]] > majorityN)
+            {
+                return nums[i];
+            }
+        }
+        else
+        {
+            ocurrences.Add(nums[i], 1);
+        }
+    }
+    return 0;
+}
+
 int SingleNumber(int[] nums)
 {
     Dictionary<int, int> numCoincidences = new Dictionary<int, int>();
@@ -124,7 +153,40 @@ int SingleNumber(int[] nums)
     return numCoincidences.OrderBy(x => x.Value).First().Key;
 }
 
-IList<IList<int>> Generate(int numRows)
+IList<int> GetRow(int rowIndex)
+{
+    //fill array with 1
+    List<int>[] results = new List<int>[rowIndex+1];
+
+    for (int i = 0; i < rowIndex+1; i++)
+    {
+        results[i] = new List<int>();
+
+        for (int j = 0; j <= i; j++)
+        {
+            results[i].Add(1);
+        }
+    }
+
+    int finalindex = 1;
+
+    //set values at position needed
+    for (int i = 2; i < results.Length; i++)
+    {
+        finalindex++;
+        for (int fills = 1; fills < finalindex; fills++)
+        {
+
+            results[i][fills] = results[i - 1][fills - 1] + results[i - 1][fills];
+        }
+
+    }
+
+
+    return results[rowIndex];
+}
+
+    IList<IList<int>> Generate(int numRows)
 {
     //fill array with 1
     List<int>[] results = new List<int>[numRows];
