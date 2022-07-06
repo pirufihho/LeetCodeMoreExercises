@@ -131,7 +131,7 @@ int MajorityElement(int[] nums)
             ocurrences.Add(nums[i], 1);
         }
     }
-    return 0;
+    return nums[0];
 }
 
 int SingleNumber(int[] nums)
