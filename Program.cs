@@ -111,6 +111,25 @@ GetRow(rowIndex);
 int[] nums6 = { 1 };
 MajorityElement(nums6);
 
+uint n4 = 43261596;
+reverseBits(n4);
+
+uint reverseBits(uint n)
+{
+    string binary = Convert.ToString(n, 2).PadLeft(32, '0');
+    var reverse = binary.Reverse();
+    string reverseString = "";
+
+    foreach (var item in reverse)
+    {
+        reverseString += item;
+    }
+
+    uint output = Convert.ToUInt32(reverseString, 2);
+
+    return output;
+}
+
 int MajorityElement(int[] nums)
 {
     int majorityN = nums.Length / 2;
