@@ -114,6 +114,24 @@ MajorityElement(nums6);
 uint n4 = 43261596;
 reverseBits(n4);
 
+uint n6 = Convert.ToUInt32("11111111111111111111111111111101", 2);
+HammingWeight(n6);
+
+int HammingWeight(uint n)
+{
+    string binary = Convert.ToString(n, 2).PadLeft(32, '0');
+    int result = 0;
+    for (int i = 0; i < binary.Length; i++)
+    {
+        if (binary[i] == '1')
+        {
+            result++;
+        }
+    }
+
+    return result;
+}
+
 uint reverseBits(uint n)
 {
     string binary = Convert.ToString(n, 2).PadLeft(32, '0');
