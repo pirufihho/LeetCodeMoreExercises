@@ -114,43 +114,22 @@ MajorityElement(nums6);
 uint n4 = 43261596;
 reverseBits(n4);
 
-int[] nums7 = { 1, 2,3,1 };
-ContainsDuplicate(nums7);
+uint n6 = Convert.ToUInt32("11111111111111111111111111111101", 2);
+HammingWeight(n6);
 
-int[] nums8 = { 1, 2, 3, 1, 2, 3 };
-int k = 2;
-ContainsNearbyDuplicate(nums8,k);
-
-bool ContainsNearbyDuplicate(int[] nums, int k)
+int HammingWeight(uint n)
 {
-    Dictionary<int, int> result = new Dictionary<int, int>();
-
-    for (int i = 0; i < nums.Length; i++)
+    string binary = Convert.ToString(n, 2).PadLeft(32, '0');
+    int result = 0;
+    for (int i = 0; i < binary.Length; i++)
     {
-        result.Add(nums[i], i);
-    }
-
-    for (int j = 0; j < nums.Length; j++)
-    {
-        var numJ = nums[j];
-        var numI = nums[j + 1];
-    }
-
-    return false;
-}
-
-bool ContainsDuplicate(int[] nums)
-{
-    Array.Sort(nums);
-    for (int i = 0; i < nums.Length -1; i++)
-    {
-        if (nums[i] == nums[i + 1])
+        if (binary[i] == '1')
         {
-            return true;
+            result++;
         }
     }
 
-    return false;
+    return result;
 }
 
 uint reverseBits(uint n)
