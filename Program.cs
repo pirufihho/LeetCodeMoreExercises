@@ -114,6 +114,45 @@ MajorityElement(nums6);
 uint n4 = 43261596;
 reverseBits(n4);
 
+int[] nums7 = { 1, 2,3,1 };
+ContainsDuplicate(nums7);
+
+int[] nums8 = { 1, 2, 3, 1, 2, 3 };
+int k = 2;
+ContainsNearbyDuplicate(nums8,k);
+
+bool ContainsNearbyDuplicate(int[] nums, int k)
+{
+    Dictionary<int, int> result = new Dictionary<int, int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        result.Add(nums[i], i);
+    }
+
+    for (int j = 0; j < nums.Length; j++)
+    {
+        var numJ = nums[j];
+        var numI = nums[j + 1];
+    }
+
+    return false;
+}
+
+bool ContainsDuplicate(int[] nums)
+{
+    Array.Sort(nums);
+    for (int i = 0; i < nums.Length -1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 uint reverseBits(uint n)
 {
     string binary = Convert.ToString(n, 2).PadLeft(32, '0');
