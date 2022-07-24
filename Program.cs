@@ -117,6 +117,23 @@ reverseBits(n4);
 uint n6 = Convert.ToUInt32("11111111111111111111111111111101", 2);
 HammingWeight(n6);
 
+int[] nums7 = { 1, 2, 3, 1 };
+ContainsDuplicate(nums7);
+
+bool ContainsDuplicate(int[] nums)
+{
+    Array.Sort(nums);
+    for (int i = 0; i < nums.Length - 1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 int HammingWeight(uint n)
 {
     string binary = Convert.ToString(n, 2).PadLeft(32, '0');
