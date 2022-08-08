@@ -120,6 +120,110 @@ HammingWeight(n6);
 int[] nums7 = { 1, 2, 3, 1 };
 ContainsDuplicate(nums7);
 
+int[] nums8 = { 1, 0, 1, 1 };
+int k = 1;
+ContainsNearbyDuplicate(nums8, k);
+
+int[] nums9 = { };
+SummaryRanges(nums9);
+
+int n7 = 134217727;
+IsPowerOfTwo(n7);
+
+bool IsPowerOfTwo(int n)
+{
+    if (n == 0)
+    {
+        return false;
+    }
+    long i = 1;
+    while (i <= n)
+    {
+        if (i == n) return true;
+        i = i * 2;
+    }
+    return false;
+}
+
+IList<string> SummaryRanges(int[] nums)
+{
+    IList<string> result = new List<string>();
+    //number - range
+    Dictionary<int, int> counts = new Dictionary<int, int>();
+
+    if(nums.Length == 0)
+    {
+        return result;
+    }
+
+    int range = 0;
+    counts.Add(nums[0], range);
+    for (int i = 1; i < nums.Length; i++)
+    {
+        if(nums[i] - nums[i-1] == 1)
+        {
+            counts.Add( nums[i],range);
+        }
+        else
+        {
+            range++;
+            counts.Add(nums[i],range);
+        }
+    }
+
+    var grouped = counts.GroupBy(x => x.Value);
+
+    for (int i = 0; i < grouped.ToList().Count; i++)
+    {
+        var test = grouped.ElementAt(i);
+        string rangeString = "";
+
+        if (test.First().Key != test.Last().Key)
+        {
+            rangeString =  test.First().Key.ToString() + "->" + test.Last().Key.ToString();
+        }
+        else
+        {
+            rangeString = test.First().Key.ToString();
+        }
+         
+        result.Add(rangeString);
+    }
+
+    return result;
+}
+
+bool ContainsNearbyDuplicate(int[] nums, int k)
+{
+    Dictionary<int, int> result = new Dictionary<int, int>();
+    Dictionary<int, int> duplicated = new Dictionary<int, int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (result.ContainsValue(nums[i])){
+            duplicated.Add(i, nums[i]); 
+        }
+        else
+        {
+            result.Add(i,nums[i]);
+        }
+
+    }
+
+    foreach (var item in duplicated)
+    {
+        var valueI = item.Key;
+        var indexI = item.Value;
+
+        var findValJ = result.Values.Where(x => x == indexI).First();
+        var indexJ = result.Where(x => x.Value == findValJ).First().Key;
+
+        if(Math.Abs(indexJ- valueI) <= k) { return true; }
+    }
+
+    return false;
+}
+
 bool ContainsDuplicate(int[] nums)
 {
     Array.Sort(nums);
