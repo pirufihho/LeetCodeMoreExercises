@@ -130,6 +130,26 @@ SummaryRanges(nums9);
 int n7 = 134217727;
 IsPowerOfTwo(n7);
 
+int num8 = 38;
+AddDigits(num8);
+
+int AddDigits(int num)
+{
+    string numS = Convert.ToString(num);
+
+    while (numS.Length != 1)
+    {
+        var Num = 0;
+        for (int i = 0; i < numS.Length; i++)
+        {
+            Num += int.Parse(numS[i].ToString());
+        }
+        numS = Convert.ToString(Num);
+    }
+
+    return 0;
+}
+
 bool IsPowerOfTwo(int n)
 {
     if (n == 0)
