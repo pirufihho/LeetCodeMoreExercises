@@ -159,6 +159,18 @@ int MissingNumber(int[] nums)
 
     if(nums.Length == 1)
     {
+        if(nums.Last() == 0)
+        {
+            missingNumber = 1;
+        }
+        if(nums.Last() == 1)
+        {
+            missingNumber = 0;
+        }
+    }
+
+    if (nums.First() != 0)
+    {
         missingNumber = 0;
     }
 
