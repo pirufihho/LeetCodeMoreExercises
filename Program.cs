@@ -133,6 +133,39 @@ IsPowerOfTwo(n7);
 int num8 = 38;
 AddDigits(num8);
 
+int[] nums10 = { 1 };
+MissingNumber(nums10);
+
+int MissingNumber(int[] nums)
+{
+    Array.Sort(nums);
+    int missingNumber = 0;
+    for (int i = 0; i < nums.Length - 1; i++)
+    {
+        if (nums[i + 1] - nums[i] == 1)
+        {
+
+        }
+        else
+        {
+            missingNumber = i + 1;
+        }
+    }
+
+    if (missingNumber == 0)
+    {
+        missingNumber = nums.Last() + 1;
+    }
+
+    if(nums.Length == 1)
+    {
+        missingNumber = 0;
+    }
+
+
+    return missingNumber;
+}
+
 int AddDigits(int num)
 {
     string numS = Convert.ToString(num);
