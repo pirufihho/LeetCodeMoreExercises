@@ -142,6 +142,54 @@ MoveZeroes(nums11);
 string s1 = "ab", t = "ab";
 IsIsomorphic(s1,t);
 
+string ransomNote = "bg", magazine = "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj";
+CanConstruct(ransomNote, magazine);
+
+
+bool CanConstruct(string ransomNote, string magazine)
+{
+    Dictionary<char, int> ransomChars = new Dictionary<char, int>();
+    Dictionary<char, int> magazineChars = new Dictionary<char, int>();
+
+    for (int i = 0; i < ransomNote.Length; i++)
+    {
+        if (ransomChars.ContainsKey(ransomNote[i]))
+        {
+            ransomChars[ransomNote[i]] = ransomChars.GetValueOrDefault(ransomNote[i]) + 1;
+        }
+        else
+        {
+            ransomChars.Add(ransomNote[i], 1);
+        }
+
+    }
+
+    for (int i = 0; i < magazine.Length; i++)
+    {
+        if (magazineChars.ContainsKey(magazine[i]))
+        {
+            magazineChars[magazine[i]] = magazineChars.GetValueOrDefault(magazine[i]) + 1;
+        }
+        else
+        {
+            magazineChars.Add(magazine[i], 1);
+        }
+    }
+
+    for (int i = 0; i < ransomNote.Length; i++)
+    {
+        var valueRansom = ransomChars.GetValueOrDefault(ransomNote[i]);
+        var valueMagazine = magazineChars.GetValueOrDefault(ransomNote[i]);
+
+        if (valueRansom > valueMagazine)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 //not working
 bool IsIsomorphic(string s, string t)
 {
