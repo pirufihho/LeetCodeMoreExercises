@@ -136,6 +136,95 @@ AddDigits(num8);
 int[] nums10 = { 1 };
 MissingNumber(nums10);
 
+int[] nums11 = { 0, 1, 0, 3, 12};
+MoveZeroes(nums11);
+
+string s1 = "ab", t = "ab";
+IsIsomorphic(s1,t);
+
+//not working
+bool IsIsomorphic(string s, string t)
+{
+    Dictionary<char, int> sChars = new Dictionary<char, int>();
+    Dictionary<char, int> tChars = new Dictionary<char, int>();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (sChars.ContainsKey(s[i]))
+        {
+            sChars[s[i]] = sChars.GetValueOrDefault(s[i]) +1;
+        }
+        else
+        {
+            sChars.Add(s[i], 1);
+        }
+
+    }
+
+    for (int i = 0; i < t.Length; i++)
+    {
+        if (tChars.ContainsKey(t[i]))
+        {
+            tChars[t[i]] = tChars.GetValueOrDefault(t[i]) + 1;
+        }
+        else
+        {
+            tChars.Add(t[i], 1);
+        }
+    }
+
+    for (int i = 0; i < sChars.Count; i++)
+    {
+        var elementS = sChars.ElementAt(i);
+        var elementT = tChars.ElementAt(i);
+
+        if(elementS.Value != elementT.Value)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void MoveZeroes(int[] nums)
+{
+
+    //count the zeroes
+    int numZeroes = 0;
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (nums[i] == 0)
+        {
+            numZeroes++;
+        }
+    }
+
+    // Make all the non-zero elements retain their original order.
+    List<int> newArray = new List<int>();
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if(nums[i] != 0)
+        {
+            newArray.Add(nums[i]);      
+        }
+    }
+
+    //move all the zeroes to the end
+    while (numZeroes!=0)
+    {
+        numZeroes--;
+        newArray.Add(0);
+    }
+
+    //combine the result
+    for (int i = 0; i < nums.Length; i++)
+    {
+        nums[i] = newArray[i];
+    }
+}
+
 int MissingNumber(int[] nums)
 {
     Array.Sort(nums);
