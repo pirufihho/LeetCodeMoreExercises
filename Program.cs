@@ -145,6 +145,43 @@ IsIsomorphic(s1,t);
 string ransomNote = "bg", magazine = "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj";
 CanConstruct(ransomNote, magazine);
 
+string pattern = "aba", s10 = "cat cat cat dog";
+wordPattern(pattern,s10);
+
+bool wordPattern(string pattern, string s)
+{
+    string[] splitWords = s.Split(' ');
+    Dictionary<string,int> ocurrences = new Dictionary<string,int>();
+    ocurrences.Add(splitWords[0],1);
+
+    for (int i = 1; i < splitWords.Length; i++)
+    {
+        if (ocurrences.ContainsKey(splitWords[i]))
+        {
+            var val = ocurrences[splitWords[i]];
+            ocurrences[splitWords[i]] = val+1;
+        }
+        else
+        {
+            ocurrences.Add(splitWords[i],1);
+        }
+    }
+
+    var getGroupedChars = pattern.GroupBy(x => x);
+    int countGroup = 0;
+
+    foreach (var item in getGroupedChars)
+    {
+        countGroup++;
+    }
+
+    if(countGroup == ocurrences.Count())
+    {
+        return true;
+    }
+    return false;
+}
+
 
 bool CanConstruct(string ransomNote, string magazine)
 {
