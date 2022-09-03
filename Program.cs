@@ -148,6 +148,80 @@ CanConstruct(ransomNote, magazine);
 string pattern = "aba", s10 = "cat cat cat dog";
 wordPattern(pattern,s10);
 
+int n11 = 129140162;
+IsPowerOfThree(n11);
+
+int n12 = 16;
+IsPowerOfFour(n12);
+
+char[] s12 = { 'h', 'e', 'l', 'l', 'o' };
+ReverseString(s12);
+
+string s13 = "aA";
+ReverseVowels(s13);
+
+string ReverseVowels(string s)
+{
+    Stack<char> vowels = new Stack<char>();
+    for (int i = 0; i < s.Length; i++)
+    {
+        if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u'
+            || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        {
+            vowels.Push(s[i]);
+        }
+    }
+
+    List<char> reversed = s.ToCharArray().ToList();
+
+    for (int i = 0; i < reversed.Count; i++)
+    {
+        if (reversed[i] == 'a' || reversed[i] == 'e' || reversed[i] == 'i' || reversed[i] == 'o' || reversed[i] == 'u'
+            || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        {
+            reversed[i] = vowels.Pop();
+        }
+    }
+
+
+    return new string(reversed.ToArray());
+}
+
+void ReverseString(char[] s)
+{
+    Array.Reverse(s);
+
+}
+
+bool IsPowerOfFour(int n)
+{
+    double powerOfFour = 0;
+    for (int i = 0; i < n; i++)
+    {
+        powerOfFour = Math.Pow(4, i);
+        if (powerOfFour == n) { return true; }
+
+        if (powerOfFour > n) { return false; }
+    }
+
+    return false;
+
+}
+
+bool IsPowerOfThree(int n)
+{
+    double powerOfThree = 0;
+    for (int i = 0; i < n; i++)
+    {
+        powerOfThree = Math.Pow(3,i);
+        if(powerOfThree == n) { return true; }
+
+        if(powerOfThree > n) { return false; }
+    }
+
+    return false;
+}
+
 bool wordPattern(string pattern, string s)
 {
     string[] splitWords = s.Split(' ');
