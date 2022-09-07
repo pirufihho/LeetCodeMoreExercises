@@ -160,6 +160,68 @@ ReverseString(s12);
 string s13 = "aA";
 ReverseVowels(s13);
 
+int[] nums12 = { 1, 2, 2, 1 }, nums13 = { 2, 2 };
+Intersection(nums12,nums13);
+
+
+int[] nums14 = { 4, 9, 5 }, nums15 = { 9, 4, 9, 8, 4 };
+Intersect(nums14,nums15);
+
+int[] Intersect(int[] nums1, int[] nums2)
+{
+    //find longest array
+    int[] longestArray = nums1.Length > nums2.Length ? nums1 : nums2;
+    int[] shortestArray = nums1.Length < nums2.Length ? nums1 : nums2;
+
+    Dictionary<int,int> interSection = new Dictionary<int,int>();
+
+    for (int i = 0; i < shortestArray.Length; i++)
+    {
+        for (int j = 0; j < longestArray.Length; j++)
+        {
+            if (shortestArray[i] == longestArray[j])
+            {
+                if (interSection.GetValueOrDefault(shortestArray[i]) != shortestArray[i])
+                {
+                    interSection.Add(shortestArray[i], shortestArray[i]);
+                }
+                
+            }
+        }
+    }
+
+    List<int> result = new List<int>();
+
+    foreach (var value in interSection)
+    {
+        result.Add(value.Key);
+    }
+
+    return result.ToArray();
+}
+
+int[] Intersection(int[] nums1, int[] nums2)
+{
+    //find longest array
+    int[] longestArray = nums1.Length > nums2.Length ? nums1 : nums2;
+    int[] shortestArray = nums1.Length < nums2.Length ? nums1 : nums2;
+
+    List<int> interSection = new List<int>();
+
+    for (int i = 0; i < shortestArray.Length; i++)
+    {
+        for (int j = 0; j < longestArray.Length; j++)
+        {
+            if(shortestArray[i] == longestArray[j])
+            {
+                interSection.Add(shortestArray[i]);
+            }
+        }
+    }
+
+    return interSection.Distinct().ToArray();
+}
+
 string ReverseVowels(string s)
 {
     Stack<char> vowels = new Stack<char>();
