@@ -185,7 +185,7 @@ char FindTheDifference(string s, string t)
     {
         if(orderS[i] != ordetT[i])
         {
-            return orderS[i];
+            return ordetT[i];
         }
     }
 
