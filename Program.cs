@@ -167,6 +167,51 @@ Intersection(nums12,nums13);
 int[] nums14 = { 4, 9, 5 }, nums15 = { 9, 4, 9, 8, 4 };
 Intersect(nums14,nums15);
 
+int num15 = 1;
+IsPerfectSquare(num15);
+
+string s5 = "leetcode";
+FirstUniqChar(s5);
+
+int FirstUniqChar(string s)
+{
+    Dictionary<int, char> result = new Dictionary<int, char>();
+    List<char> listChar = s.ToList();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        result.Add(i,s[i]);
+    }
+
+    List<char> listOneOcur = new List<char>();
+
+    var grouPed = result.GroupBy(x => x.Value);
+
+    foreach (var grou in grouPed)
+    {
+        if(grou.Count() == 1)
+        {
+            return grou.FirstOrDefault().Key;
+        }
+    }
+
+    return 0;
+}
+
+bool IsPerfectSquare(int num)
+{
+    if (num == 1) { return true; }
+
+    for (int i = 0; i < num; i++)
+    {
+        if (i * i == num) { return true; }
+
+        if (i * i > num) { return false; }
+    }
+
+    return false;
+}
+
 int[] Intersect(int[] nums1, int[] nums2)
 {
     //find longest array
@@ -174,6 +219,7 @@ int[] Intersect(int[] nums1, int[] nums2)
     int[] shortestArray = nums1.Length < nums2.Length ? nums1 : nums2;
 
     Dictionary<int,int> interSection = new Dictionary<int,int>();
+    int index = 0;
 
     for (int i = 0; i < shortestArray.Length; i++)
     {
@@ -181,10 +227,11 @@ int[] Intersect(int[] nums1, int[] nums2)
         {
             if (shortestArray[i] == longestArray[j])
             {
-                if (interSection.GetValueOrDefault(shortestArray[i]) != shortestArray[i])
-                {
-                    interSection.Add(shortestArray[i], shortestArray[i]);
-                }
+                
+                //if (interSection.GetValueOrDefault(shortestArray[i]) != shortestArray[i])
+                //{
+                    interSection.Add(index++, shortestArray[i]);
+                //}
                 
             }
         }
