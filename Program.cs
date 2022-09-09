@@ -173,6 +173,25 @@ IsPerfectSquare(num15);
 string s5 = "leetcode";
 FirstUniqChar(s5);
 
+string s6 = "ae", t6 = "aea";
+FindTheDifference(s6, t6);
+
+char FindTheDifference(string s, string t)
+{
+    var orderS = s.OrderBy(s => s).ToList();
+    var ordetT = t.OrderBy(t => t).ToList();
+
+    for (int i = 0; i < orderS.Count(); i++)
+    {
+        if(orderS[i] != ordetT[i])
+        {
+            return orderS[i];
+        }
+    }
+
+    return ordetT.LastOrDefault();
+}
+
 int FirstUniqChar(string s)
 {
     Dictionary<int, char> result = new Dictionary<int, char>();
@@ -195,7 +214,7 @@ int FirstUniqChar(string s)
         }
     }
 
-    return 0;
+    return -1;
 }
 
 bool IsPerfectSquare(int num)
