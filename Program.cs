@@ -179,7 +179,59 @@ FindTheDifference(s6, t6);
 string s7 = "leeeeetcode", t7 = "leeeeetcode";
 IsSubsequence(s7, t7);
 
-bool IsSubsequence(string s, string t)
+int n13 = 3;
+FizzBuzz(n13);
+
+int[] nums16 = { 3, 2, 1 };
+ThirdMax(nums16);
+
+int ThirdMax(int[] nums)
+{
+    List<int> result = nums.ToList().Distinct().ToList();
+    result.Sort();
+
+    for (int i = result.Count-1; i >= 0; i--)
+    {
+        if(i == result.Count -3)
+        {
+            return result[i];
+        }
+    }
+
+    return result.LastOrDefault();
+}
+
+IList<string> FizzBuzz(int n)
+{
+    List<string> list = new List<string>();
+
+    for (int i = 1; i <= n; i++)
+    {
+        bool divisibleBy3 = (i % 3 == 0);
+        bool divisibleBy5 = (i % 5 == 0);
+
+        if (divisibleBy3 && divisibleBy5)
+        {
+            list.Add("FizzBuzz");
+        }
+        else if (divisibleBy3)
+        {
+            list.Add("Fizz");
+        }
+        else if (divisibleBy5)
+        {
+            list.Add("Buzz");
+        }
+        else
+        {
+            list.Add(Convert.ToString(i));
+        }
+    }
+
+    return list;
+}
+
+    bool IsSubsequence(string s, string t)
 {
     Dictionary<int, char> result = new Dictionary<int, char>(); 
 
