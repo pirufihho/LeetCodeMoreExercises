@@ -176,6 +176,41 @@ FirstUniqChar(s5);
 string s6 = "ae", t6 = "aea";
 FindTheDifference(s6, t6);
 
+string s7 = "leeeeetcode", t7 = "leeeeetcode";
+IsSubsequence(s7, t7);
+
+bool IsSubsequence(string s, string t)
+{
+    Dictionary<int, char> result = new Dictionary<int, char>(); 
+
+    var lastIndex = 0;
+    
+    for (var i = 0; i < s.Length; i++)
+    {
+        for (int j = 0; j < t.Length; j++)
+        {
+            if(s[i] == t[j])
+            {
+                if (!result.ContainsKey(j))
+                {
+                    if (j >= lastIndex)
+                    {
+                        lastIndex = j;
+                        result.Add(j, t[j]);
+                    }
+                }
+            }
+        }
+    }
+
+    if(result.Count == s.Length)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 char FindTheDifference(string s, string t)
 {
     var orderS = s.OrderBy(s => s).ToList();
