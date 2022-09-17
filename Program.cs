@@ -185,6 +185,114 @@ FizzBuzz(n13);
 int[] nums16 = { 3, 2, 1 };
 ThirdMax(nums16);
 
+string num1 = "0", num2 = "0";
+AddStrings(num1, num2);
+
+string s18 = "                ";
+CountSegments(s18);
+
+int n18 = 2;
+ArrangeCoins(n18);
+
+int ArrangeCoins(int n)
+{
+    int coins = n;
+
+    if(n == 1)
+    {
+        return 1;
+    }
+
+    for (int i = 1; i < n; i++)
+    {
+        coins = coins - i;
+
+        if(coins == 0)
+        {
+            return i;
+        }
+        if(coins < 0)
+        {
+            return i - 1;
+        }
+    }
+
+    return 0;
+}
+
+int CountSegments(string s)
+{
+    if(s == "")
+    {
+        return 0;
+    }
+
+    var splited = s.Split(" ");
+    List<string> result = new List<string>();
+
+    for (int i = 0; i < splited.Length; i++)
+    {
+        if(splited[i] != "")
+        {
+            result.Add(splited[i]);
+        }
+    }
+
+    return result.Count();
+}
+
+string AddStrings(string num1, string num2)
+{
+
+    string result = "";
+
+    if (num1.Length > num2.Length)
+    {
+        int missing0 = num1.Length - num2.Length;
+
+        for (int i = 0; i < missing0; i++)
+        {
+            num2 = num2.Insert(0,"0");
+        }
+    }
+    else
+    {
+        int missing0 = num2.Length - num1.Length;
+
+        for (int i = 0; i < missing0; i++)
+        {
+            num1 = num1.Insert(0,"0");
+        }
+    }
+    bool addOne = false;
+
+    for (int i = num1.Length-1; i >= 0; i--)
+    { 
+        double n1 = char.GetNumericValue(num1[i]);
+        double n2 = char.GetNumericValue(num2[i]);
+
+        double sum = (addOne) ? n1 + n2 + 1 : n1 + n2;
+        if (sum > 9)
+        {
+            addOne = true;
+            sum = sum - 10;
+        }
+        else
+        {
+            addOne = false;
+        }
+
+        result = result.Insert(0, Convert.ToString(sum));
+    }
+
+    if (addOne)
+    {
+        result = result.Insert(0, "1");
+    }
+
+    return result;
+}
+
 int ThirdMax(int[] nums)
 {
     List<int> result = nums.ToList().Distinct().ToList();
