@@ -194,11 +194,58 @@ CountSegments(s18);
 int n18 = 2;
 ArrangeCoins(n18);
 
+int[] nums17 = { 2,2 };
+FindDisappearedNumbers(nums17);
+
+IList<int> FindDisappearedNumbers(int[] nums)
+{
+    List<int> result = new List<int>();
+    List<int> ordered = new List<int>();
+    ordered = nums.OrderBy(x => x).ToList();
+
+    Dictionary<int, int> map = new Dictionary<int, int>();
+
+    for (int i = 1; i < ordered.Count; i++)
+    {
+        if(ordered[i]-ordered[i-1] == 1 || ordered[i] - ordered[i - 1] == 0)
+        {
+
+        }
+        else
+        {
+            map.Add(ordered[i-1],ordered[i]);
+        }
+
+    }
+
+    foreach (var item in map)
+    {
+        int startIndex = item.Key;
+        int finishIndex = item.Value;
+
+        for (int i = startIndex+1; i < finishIndex; i++)
+        {
+            result.Add(i);
+        }
+    }
+    if(map.Count == 0)
+    {
+        result.Add(ordered.LastOrDefault()+1);
+    }
+
+    return result;
+}
+
 int ArrangeCoins(int n)
 {
     int coins = n;
 
     if(n == 1)
+    {
+        return 1;
+    }
+
+    if (n == 2)
     {
         return 1;
     }
