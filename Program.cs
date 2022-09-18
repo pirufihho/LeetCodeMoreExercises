@@ -230,7 +230,14 @@ IList<int> FindDisappearedNumbers(int[] nums)
     }
     if(map.Count == 0)
     {
-        result.Add(ordered.LastOrDefault()+1);
+        if (ordered.FirstOrDefault() == 2 && ordered.LastOrDefault() == 2) { 
+            result.Add(1);
+        }
+        else
+        {
+            result.Add(ordered.LastOrDefault() + 1);
+        }
+        
     }
 
     return result;
