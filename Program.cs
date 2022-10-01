@@ -197,6 +197,30 @@ ArrangeCoins(n18);
 int[] nums17 = { 2,2 };
 FindDisappearedNumbers(nums17);
 
+string s19 = "abab";
+RepeatedSubstringPattern(s19);
+
+bool RepeatedSubstringPattern(string s)
+{
+    int len = s.Length;
+
+    for (int i = 1; i <= len/2; i++)
+    {
+        if(len % i == 0)
+        {
+            int num_repeats = len / i;
+            string subsTring = s.Substring(0, i);
+            StringBuilder sb = new StringBuilder(); 
+            for (int j = 0; j < num_repeats; j++)
+            {
+                sb.Append(subsTring);
+            }
+            if(sb.ToString().Equals(s)) return true;
+        }
+    }   
+    return false;
+}
+
 IList<int> FindDisappearedNumbers(int[] nums)
 {
     List<int> result = new List<int>();
