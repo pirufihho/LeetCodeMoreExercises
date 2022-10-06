@@ -200,6 +200,40 @@ FindDisappearedNumbers(nums17);
 string s19 = "abab";
 RepeatedSubstringPattern(s19);
 
+int x1 = 3, y1 = 1;
+HammingDistance(x1, y1);
+
+int HammingDistance(int x, int y)
+{
+    string binaryX = ToBinary(x);
+    string binaryY = ToBinary(y);
+
+    int hamming = 0;
+
+    for (int i = 0; i < binaryX.Length; i++)
+    {
+        if (binaryX[i] != binaryY[i])
+        {
+            hamming++;
+        }
+    }
+
+    return hamming;
+}
+
+static string ToBinary(int x)
+{
+    char[] buff = new char[32];
+
+    for (int i = 31; i >= 0; i--)
+    {
+        int mask = 1 << i;
+        buff[31 - i] = (x & mask) != 0 ? '1' : '0';
+    }
+
+    return new string(buff);
+}
+
 bool RepeatedSubstringPattern(string s)
 {
     int len = s.Length;
