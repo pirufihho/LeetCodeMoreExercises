@@ -226,7 +226,7 @@ int FindComplement(int num)
     int res = Convert.ToInt32(result, 2);
 
 
-    return 0;
+    return res;
 }
 
 int HammingDistance(int x, int y)
