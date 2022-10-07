@@ -203,6 +203,32 @@ RepeatedSubstringPattern(s19);
 int x1 = 3, y1 = 1;
 HammingDistance(x1, y1);
 
+int num22 = 5;
+FindComplement(num22);
+
+int FindComplement(int num)
+{
+    string binary = Convert.ToString(num, 2);
+
+    string result = "";
+
+    for (int i = 0; i < binary.Length; i++)
+    {
+        if(binary[i] == '0')
+        {
+            result = result + '1';
+        }
+        else
+        {
+            result = result + '0';
+        }
+    }
+    int res = Convert.ToInt32(result, 2);
+
+
+    return 0;
+}
+
 int HammingDistance(int x, int y)
 {
     string binaryX = ToBinary(x);
