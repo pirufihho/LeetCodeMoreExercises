@@ -206,6 +206,34 @@ HammingDistance(x1, y1);
 int num22 = 5;
 FindComplement(num22);
 
+int[] nums23 = { 1, 1, 0, 1, 1, 1 };
+FindMaxConsecutiveOnes(nums23);
+
+int FindMaxConsecutiveOnes(int[] nums)
+{
+    int maxOnes = 0;
+    int result = 0;
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (nums[i] == 1)
+        {
+            maxOnes++;
+
+            if(maxOnes >= result)
+            {
+                result = maxOnes;
+            }
+        }
+        else
+        {
+            maxOnes = 0;
+        }
+    }
+
+    return result;
+}
+
 int FindComplement(int num)
 {
     string binary = Convert.ToString(num, 2);
