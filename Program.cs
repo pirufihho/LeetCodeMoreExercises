@@ -209,6 +209,39 @@ FindComplement(num22);
 int[] nums23 = { 1, 1, 0, 1, 1, 1 };
 FindMaxConsecutiveOnes(nums23);
 
+int[] timeSeries = { 1, 4 };
+int duration = 2;
+FindPoisonedDuration(timeSeries, duration);
+
+int FindPoisonedDuration(int[] timeSeries, int duration)
+{
+    int poisonedSecs = 0;
+    int lastIndex = timeSeries.Last() * duration;
+
+    for (int i = 0; i < timeSeries.Length; i++)
+    {
+        if(i == 0)
+        {
+            poisonedSecs += 2;
+        }
+        else
+        {
+            if (timeSeries[i] - timeSeries[i - 1] == 1)
+            {
+                poisonedSecs += 1;
+            }
+            else
+            {
+                poisonedSecs += 2;
+            }
+        }
+        
+    }
+
+
+    return poisonedSecs;
+}
+
 int FindMaxConsecutiveOnes(int[] nums)
 {
     int maxOnes = 0;
